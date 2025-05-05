@@ -37,7 +37,7 @@ pub struct AnimationsConfig {
 }
 
 #[derive(Debug, Resource, Default)]
-pub struct EntitesToRemove(Vec<Entity>);
+pub struct EntitiesToRemove(Vec<Entity>);
 
 #[derive(Component, Deref, DerefMut, Clone, Debug, Default)]
 pub struct AnimationTimer(pub Timer);
@@ -254,7 +254,7 @@ impl Animations {
         key: Entity,
         animation: AnimationName,
         pos: Vec3,
-    ) -> Result<(SpriteBundle, TextureAtlas), ()> {
+    ) -> Result<Sprite, ()> {
         let name = animation;
         let Some(animation) = self.fx_animations.get(animation) else {
             return Err(());
@@ -298,14 +298,9 @@ impl Animations {
                 fx_animation: true,
             },
         );
-        Ok((
-            SpriteBundle {
-                transform: Transform::from_translation(pos),
-                texture: handles.image().clone(),
-                ..Default::default()
-            },
-            texture_atlas
-        ))
+        Ok(
+            Sprite::from_atlas_image(handles.image(), texture_atlas)
+        )
         // Ok(SpriteSheetBundle {
         //     atlas,
         //     transform: Transform::from_translation(pos),

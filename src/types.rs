@@ -231,16 +231,16 @@ impl AnimationType {
         }
     }
 
-    pub fn reset_animation(&mut self) {
-        match self {
-            AnimationType::Timed(animation, _) => animation.reset_animation(None, None, None),
-            AnimationType::Transform(animation, _) => animation.reset_animation(None, None, None),
-            AnimationType::LinearTimed(animation, _) => animation.reset_animation(None),
-            AnimationType::LinearTransform(animation, _) => animation.reset_animation(None),
-            AnimationType::SingleFrame(animation, _) => animation.reset_animation(None, None),
-            AnimationType::None => panic!("Something went terribly wrong"),
-        }
-    }
+    // pub fn reset_animation(&mut self) {
+    //     match self {
+    //         AnimationType::Timed(animation, _) => animation.reset_animation(None, None, None),
+    //         AnimationType::Transform(animation, _) => animation.reset_animation(None, None, None),
+    //         AnimationType::LinearTimed(animation, _) => animation.reset_animation(None),
+    //         AnimationType::LinearTransform(animation, _) => animation.reset_animation(None),
+    //         AnimationType::SingleFrame(animation, _) => animation.reset_animation(None, None),
+    //         AnimationType::None => panic!("Something went terribly wrong"),
+    //     }
+    // }
 
     pub fn is_none(&self) -> bool {
         matches!(self, AnimationType::None)
